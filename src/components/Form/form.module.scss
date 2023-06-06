@@ -20,7 +20,11 @@
     padding-left: 15px;
     padding-top: 1px;
 }
-
+.block_theme {
+    display: flex;
+    justify-content: space-between;
+    
+}
 @media (max-width: 610px) {
     .text_area {
         width: 100%;
@@ -34,6 +38,7 @@
         
     }
     .block_theme {
+        display: block;
         margin-top: 100px;
     }
     .block_input p {
