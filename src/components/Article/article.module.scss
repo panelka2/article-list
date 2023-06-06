@@ -1,0 +1,72 @@
+.article_block {
+    background: white;
+    border-radius: 7px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.author,
+.title,
+.text,
+.theme,
+.date {
+    margin: 0; 
+}
+.author_block {
+    display: flex;
+}
+.date {
+    margin-left: 50px;
+}
+.theme {
+    font-size: 18px;
+}
+.text {
+    margin: 8px 0;
+}
+.icons {
+    display: flex;
+    justify-content: flex-end;
+}
+.editButton {
+    width: 25px;
+    border-radius: 5px;
+}
+.editButton:hover  {
+    cursor: pointer;
+    background: rgb(224, 210, 210); 
+}
+.deleteButton {
+    width: 25px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.deleteButton:hover  {
+    cursor: pointer;
+    background: rgb(224, 210, 210); 
+}
+.messageButton {
+    width: 25px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.messageButton:hover  {
+    cursor: pointer;
+    background: rgb(224, 210, 210); 
+}
+.comments {
+    margin-top: 20px;
+}
+.comment_block {
+    border: 2px solid;
+    border-radius: 7px;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+    margin-top: 20px;
+}
+.comment_block p {
+    padding-left: 20px;
+}
+.comment_name {
+    font-weight: 500;
+} 

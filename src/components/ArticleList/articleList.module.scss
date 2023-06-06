@@ -1,0 +1,51 @@
+.main_blocks {
+    display: block;
+}
+.header {
+    display: flex;
+    height: 60px;
+    justify-content: space-between
+} 
+.add_button {
+    height: 35px;
+    border-radius: 7px;
+}
+
+.block_button {
+    display: flex;
+    align-items: center;
+}
+.filter_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.bottom_filter_block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.search_input {
+    width: 250px;
+    height: 30px;
+    border-radius: 7px;
+    padding-left: 15px;  
+    font-size: 15px;
+}
+.reset_filter_button:hover {
+    cursor: pointer; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+div > label > select {
+    border-radius: 4px;
+}
+
+@media (max-width: 610px) {
+    .header {
+        margin-top: 30px;
+    }
+    .reset_filter_button {
+        height: 44px;
+    }
+}

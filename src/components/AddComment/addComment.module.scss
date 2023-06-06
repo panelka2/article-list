@@ -1,0 +1,51 @@
+.name_input {
+    width: 100%;
+    height: 30px;
+    border-radius: 7px; 
+    padding-left: 15px;
+    font-size: 15px;
+    margin-right: 20px;
+}
+.input_block {
+    margin-right: 20px;
+}
+.area_block {
+    margin-top: 15px;
+    margin-right: 20px;
+    border: 2px solid black;
+    border-radius: 7px;
+    width: 100%;
+}
+.area_block textarea{
+    resize:none;
+    border:none;
+    width: 96%;
+    height: auto;
+    min-height: 150px;  
+    border-radius: 7px; 
+    padding-left: 15px;
+    font-size: 15px;
+    margin-right: 20px;
+    padding-top: 10px;
+    &:focus {
+        outline: none; 
+        border-color: transparent;  
+        box-shadow: none;  
+      }
+}
+.leave_comment {
+    display: flex;
+    justify-content: flex-end;
+}
+.leave_comment button {
+    margin-top: 10px;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 610px) {
+    .area_block textarea {
+        width: 94%;
+    }
+}
