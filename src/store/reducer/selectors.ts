@@ -1,7 +1,7 @@
 import { RootState } from '../store';
-import {createSelector} from '@reduxjs/toolkit'
+import { createSelector } from '@reduxjs/toolkit'
 
-const getListItems = (state:RootState) => {
+const getListItems = (state: RootState) => {
     return state.articleListSlice
 }
 
@@ -13,7 +13,7 @@ export const getToggleShow = createSelector(getListItems, ({
     showFormState
 }) => showFormState)
 
-export const getFormData = createSelector(getListItems,({
+export const getFormData = createSelector(getListItems, ({
     formData
 }) => formData)
 

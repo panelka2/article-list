@@ -1,15 +1,28 @@
-import { useState } from 'react';
-import { IArticleProps } from "../types/IArticle";
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { deleteArticle, isEditArticle, setIndexForEditing } from '../../store/reducer/actions';
+import { useState } from "react";
+import { IArticleProps } from "../../types/IArticle";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import {
+  deleteArticle,
+  isEditArticle,
+  setIndexForEditing,
+} from "../../store/reducer/actions";
 import { getIsEditingArticle } from "../../store/reducer/selectors";
 import { AddComment } from "../AddComment";
-import styles from './article.module.scss';
-import editImg from '../../icons/edit.png';
-import deleteImg from '../../icons/delete.png';
-import messangerImg from '../../icons/messenger.png';
+import styles from "./article.module.scss";
+import editImg from "../../icons/edit.png";
+import deleteImg from "../../icons/delete.png";
+import messangerImg from "../../icons/messenger.png";
 
-export const Article = ({ id, title, text, theme, author, date, index, comments }: IArticleProps) => {
+export const Article = ({
+  id,
+  title,
+  text,
+  theme,
+  author,
+  date,
+  index,
+  comments,
+}: IArticleProps) => {
   const dispatch = useAppDispatch();
   const { isEditingArticle } = useAppSelector((state) => ({
     isEditingArticle: getIsEditingArticle(state),
@@ -29,7 +42,6 @@ export const Article = ({ id, title, text, theme, author, date, index, comments 
   const handleToggleComments = () => {
     setShowComments(!showComments);
   };
-
   return (
     <div className={styles.article_block}>
       <div className={styles.article}>
@@ -63,7 +75,7 @@ export const Article = ({ id, title, text, theme, author, date, index, comments 
       </div>
       {showComments && (
         <div className={styles.comments}>
-          <AddComment index={{ index: index }}/>
+          <AddComment index={index} />
           {comments.map((el, i) => (
             <div className={styles.comment_block} key={i}>
               <p className={styles.comment_name}>{el.name}</p>

@@ -1,45 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import { addArticle, isEditArticle, toggleForm, editArticle } from '../../store/reducer/actions';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { IArticle } from '../types/IArticle';
-import { Form } from '../Form';
-import { getIndexForEditing, getIsEditingArticle, getToggleShow, getArticles } from '../../store/reducer/selectors';
-import styles from './add_article_form.module.scss'
+import React, { useState, useEffect } from "react";
+import {
+  addArticle,
+  isEditArticle,
+  toggleForm,
+  editArticle,
+} from "../../store/reducer/actions";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { AddArticleFormProps, IArticle } from "../../types/IArticle";
+import { Form } from "../Form";
+import {
+  getIndexForEditing,
+  getIsEditingArticle,
+  getToggleShow,
+  getArticles,
+} from "../../store/reducer/selectors";
+import styles from "./addArticleForm.module.scss";
 
-export const AddArticleForm = ({ nameForm, buttonName, data }: { nameForm: string; buttonName: string; data?: IArticle }) => {
+export const AddArticleForm = ({
+  nameForm,
+  buttonName,
+  data,
+}: AddArticleFormProps) => {
   const dispatch = useAppDispatch();
-  const { showFormState, isEditingArticle, indexForEditing, articles } = useAppSelector((state) => ({
-    showFormState: getToggleShow(state),
-    isEditingArticle: getIsEditingArticle(state),
-    indexForEditing: getIndexForEditing(state),
-    articles: getArticles(state)
-  }))
+  const { showFormState, isEditingArticle, indexForEditing, articles } =
+    useAppSelector((state) => ({
+      showFormState: getToggleShow(state),
+      isEditingArticle: getIsEditingArticle(state),
+      indexForEditing: getIndexForEditing(state),
+      articles: getArticles(state),
+    }));
 
   const [formData, setFormData] = useState<IArticle>({
-    title: '',
-    text: '',
-    theme: '',
-    author: '',
+    title: "",
+    text: "",
+    theme: "",
+    author: "",
     id: Date.now(),
     date: new Date().toLocaleDateString(),
-    comments: []
+    comments: [],
   });
+
+  const ISFORMEMPTY =
+    formData.title.trim() === "" ||
+    formData.text.trim() === "" ||
+    formData.theme.trim() === "" ||
+    formData.author.trim() === "";
 
   useEffect(() => {
     if (data && isEditingArticle) {
       setFormData({
-        title: data.title || '',
-        text: data.text || '',
-        theme: data.theme || '',
-        author: data.author || '',
-        id: typeof data.id === 'string' ? parseInt(data.id) : data.id || 0,
+        title: data.title || "",
+        text: data.text || "",
+        theme: data.theme || "",
+        author: data.author || "",
+        id: typeof data.id === "string" ? parseInt(data.id) : data.id || 0,
         date: data.date || new Date().toLocaleDateString(),
-        comments: data.comments || []
+        comments: data.comments || [],
       });
     }
   }, [data, isEditingArticle, indexForEditing, articles]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -48,39 +71,34 @@ export const AddArticleForm = ({ nameForm, buttonName, data }: { nameForm: strin
   };
 
   const handleAddArticle = (e: React.FormEvent) => {
+    e.preventDefault();
 
-      e.preventDefault();
+    if (ISFORMEMPTY) {
+      return;
+    }
 
-      if (
-        formData.title.trim() === '' ||
-        formData.text.trim() === '' ||
-        formData.theme.trim() === '' ||
-        formData.author.trim() === ''
-      ) {
-        return;
-      }
+    const newArticle: IArticle = {
+      ...formData,
+      id: Date.now(),
+    };
 
-      const newArticle: IArticle = {
-        ...formData,
-        id: Date.now(),
-      };
-      if(!isEditingArticle) {
-        dispatch(addArticle(newArticle))
-        dispatch(toggleForm(!showFormState))
-      } else {
-        dispatch(editArticle(formData))
-        dispatch(isEditArticle(!isEditingArticle))
-      }
-      setFormData({
-        title: '',
-        text: '',
-        theme: '',
-        author: '',
-        id: 0,
-        date: new Date().toLocaleDateString(),
-        comments: []
-      });
-    
+    if (!isEditingArticle) {
+      dispatch(addArticle(newArticle));
+      dispatch(toggleForm(!showFormState));
+    } else {
+      dispatch(editArticle(formData));
+      dispatch(isEditArticle(!isEditingArticle));
+    }
+
+    setFormData({
+      title: "",
+      text: "",
+      theme: "",
+      author: "",
+      id: 0,
+      date: new Date().toLocaleDateString(),
+      comments: [],
+    });
   };
 
   return (
@@ -92,16 +110,7 @@ export const AddArticleForm = ({ nameForm, buttonName, data }: { nameForm: strin
         handleAddArticle={handleAddArticle}
       />
       <div>
-        <button
-          type="submit"
-          onClick={handleAddArticle}
-          disabled={
-            formData.title.trim() === '' ||
-            formData.text.trim() === '' ||
-            formData.theme.trim() === '' ||
-            formData.author.trim() === ''
-          }
-        >
+        <button type="submit" onClick={handleAddArticle} disabled={ISFORMEMPTY}>
           {buttonName}
         </button>
       </div>

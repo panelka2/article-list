@@ -1,47 +1,42 @@
-import React, { useState } from 'react';
-import { useAppDispatch } from '../../hooks/redux';
-import { addComment, setIndexForEditing } from '../../store/reducer/actions';
-import styles from './addComment.module.scss';
+import React, { useState } from "react";
+import { useAppDispatch } from "../../hooks/redux";
+import { addComment, setIndexForEditing } from "../../store/reducer/actions";
+import styles from "./addComment.module.scss";
 
-type Props = {
-  index: {
-    index: number;
-  };
-};
-
-export const AddComment = ({ index }: Props) => {
+export const AddComment = ({ index }: { index: number }) => {
   const dispatch = useAppDispatch();
 
   const [comment, setComment] = useState({
-    name: '',
-    text: ''
+    name: "",
+    text: "",
   });
 
-  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleCommentChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
     setComment({
       ...comment,
-      text: e.target.value
+      text: e.target.value,
     });
   };
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setComment({
       ...comment,
-      name: e.target.value
+      name: e.target.value,
     });
   };
 
-  const handleSubmitComment = () => {
-    
+  const handleSubmitComment = (): void => {
     if (!comment.name || !comment.text) {
-      return; 
+      return;
     }
 
     setComment({
-      name: '',
-      text: ''
+      name: "",
+      text: "",
     });
-    dispatch(setIndexForEditing(index.index));
+    dispatch(setIndexForEditing(index));
     dispatch(addComment(comment));
   };
 
@@ -50,7 +45,13 @@ export const AddComment = ({ index }: Props) => {
   return (
     <div>
       <div className={styles.input_block}>
-        <input className={styles.name_input} type="text" value={comment.name} onChange={handleNameChange} placeholder="Ваше имя" />
+        <input
+          className={styles.name_input}
+          type="text"
+          value={comment.name}
+          onChange={handleNameChange}
+          placeholder="Ваше имя"
+        />
       </div>
       <div className={styles.area_block}>
         <textarea
@@ -59,7 +60,9 @@ export const AddComment = ({ index }: Props) => {
           placeholder="Ваш комментарий"
         />
         <div className={styles.leave_comment}>
-          <button onClick={handleSubmitComment} disabled={isButtonDisabled}>Отправить комментарий</button>
+          <button onClick={handleSubmitComment} disabled={isButtonDisabled}>
+            Отправить комментарий
+          </button>
         </div>
       </div>
     </div>

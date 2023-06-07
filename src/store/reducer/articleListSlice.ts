@@ -1,33 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ArticleState, Comments, IArticle } from '../../components/types/IArticle';
+import { IArticleState, IComments, IArticle } from '../../types/IArticle';
 
-const initialState: ArticleState = {
+const initialState: IArticleState = {
   articles: [
-      {
-        title: "Заголовок заголовок рыба",
-        text: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.",
-        theme: "Тема 1",
-        author: "Витя Сергеев",
-        date: "04-06-2022",
-        id: 1,
-        comments: [
-          {name: 'Вася',text: 'Класс!'},
-          {name: 'Мария',text: 'ОГО!'}
-        ]
-      },
-      {
-        title: "Заголовок 2",
-        text: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.",
-        theme: "Тема 2",
-        author: "Автор 2",
-        date: "03-04-2023",
-        id: 2,
-        comments: [
-          {name: 'Анатолий', text: 'Ну такое'},
-          {name: 'Григорий', text: 'Ля)'}
-        ]
-      },
-    ],
+    {
+      title: "Заголовок заголовок рыба",
+      text: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.",
+      theme: "Тема 1",
+      author: "Витя Сергеев",
+      date: "04.06.2022",
+      id: 1,
+      comments: [
+        { name: 'Вася', text: 'Класс!' },
+        { name: 'Мария', text: 'ОГО!' }
+      ]
+    },
+    {
+      title: "Заголовок 2",
+      text: "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.",
+      theme: "Тема 2",
+      author: "Автор 2",
+      date: "03.04.2023",
+      id: 2,
+      comments: [
+        { name: 'Анатолий', text: 'Ну такое' },
+        { name: 'Григорий', text: 'Ля)' }
+      ]
+    },
+  ],
   formData: {
     title: '',
     text: '',
@@ -42,7 +42,7 @@ const initialState: ArticleState = {
   currentList: [],
   showFormStateEditing: false,
   indexForEditing: 0
-  }
+}
 
 export const articleListSlice = createSlice({
   name: 'articleList',
@@ -77,7 +77,7 @@ export const articleListSlice = createSlice({
         state.articles[index] = action.payload;
       }
     },
-    addComment: (state, action: PayloadAction<Comments>) => {
+    addComment: (state, action: PayloadAction<IComments>) => {
       const id = state.currentList[state.indexForEditing].id;
       const index = state.articles.findIndex((el) => el.id === id);
       if (index !== -1) {
